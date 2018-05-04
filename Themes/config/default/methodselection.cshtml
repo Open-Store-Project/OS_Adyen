@@ -1,0 +1,79 @@
+@inherits NBrightBuy.render.NBrightBuyRazorTokens<NBrightDNN.NBrightRazor>
+@using System.Linq
+@using DotNetNuke.Common
+@using DotNetNuke.Entities.Portals
+@using DotNetNuke.Entities.Users
+@using NBrightDNN
+@using Nevoweb.DNN.NBrightBuy.Components
+@using System.IO.Compression
+@using System.Security.Cryptography;
+@using System.Text
+@using System.Web
+@using NBrightCore.common;
+
+@{ 
+    var objCtrl = new NBrightBuyController();
+    var info = objCtrl.GetPluginSinglePageData("OS_Adyenpayment", "OS_AdyenPAYMENT", Utils.GetCurrentCulture());
+    var currentcart = new CartData(PortalSettings.Current.PortalId);
+}
+
+@AddMetaData("resourcepath", "/DesktopModules/NBright/OS_Adyen/App_LocalResources")
+@AddMetaData("resourcepath", "/DesktopModules/NBright/NBrightBuy/App_LocalResources/")
+
+<style>
+    /* Default buttons */
+    .paybutton {
+        background: #1AA8E3;
+        color: #FFFFFF;
+    }
+
+        .paybutton:hover {
+            background: #23BAF5;
+            color: #FFFFFF;
+        }
+
+    .paybutton {
+        display: inline-block;
+        font-weight: bold;
+        line-height: 35px;
+        padding: 0 10px;
+        margin: 10px 10px 10px 0;
+        text-align: center;
+        width: 45%;
+        border: medium none;
+        text-decoration: none;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+        .paybutton:hover {
+            text-decoration: none;
+        }
+</style>
+
+<div id="OS_Adyenparam">
+
+    <!-- we require "paymentproviderkey" so it can be assigned to the order when the payment is selected  -->
+    <input id="paymentproviderkey" type="hidden" value="@info.GetXmlProperty("genxml/hidden/ctrl")" />
+
+    <br />
+    <div>
+        <img width="120px" src='/DesktopModules/NBright/OS_Adyen/Themes/config/img/@(info.GetXmlProperty("genxml/dropdownlist/imagelogo"))' />
+    </div>
+
+    <div class="defaultmessage">@info.GetXmlProperty("genxml/lang/genxml/textbox/message")</div>
+
+    <div class="clearfix"></div>
+
+    <div id="cartactions" style="">
+        <div style="clear: both;">
+            @if (currentcart.PurchaseInfo.GetXmlPropertyDouble("genxml/appliedtotal") > 0)
+            {
+        <a href="?provider=@info.GetXmlProperty("genxml/hidden/ctrl")" id="cmdOS_Adyen" class="primarybutton">@info.GetXmlProperty("genxml/lang/genxml/textbox/buttontext")</a>
+            }
+        </div>
+    </div>
+
+</div>
+
+<hr />
