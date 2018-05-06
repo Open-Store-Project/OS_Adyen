@@ -20,7 +20,7 @@ var info = (NBrightInfo)Model.List.First();
     <input id="uilang" type="hidden" value="@Model.Lang" />
     <input id="nextlang" type="hidden" value="@Model.Lang" />
     <!-- ctrl name required to pass to the settingfield.cshtml template, so it can link the order to the payment method -->
-    <input id="ctrl" type="hidden" update="save" value="@Model.GetUrlParam("ctrl")" />
+    <input id="ctrl" type="hidden" update="save" value="os_adyen" />
 
 
     <div class="row">
