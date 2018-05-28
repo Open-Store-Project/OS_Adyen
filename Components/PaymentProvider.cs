@@ -44,6 +44,8 @@ namespace OS_Adyen
             orderData.SavePurchaseData();
             try
             {
+                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
                 HttpContext.Current.Response.Clear();
                 HttpContext.Current.Response.Write(ProviderUtils.GetBankRemotePost(orderData));
             }
