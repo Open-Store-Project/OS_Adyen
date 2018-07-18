@@ -92,7 +92,7 @@ namespace OS_Adyen.OpenStore
             {
                 if (orderid.Length >= 9)
                 {
-                    orderid.Substring(0, 9); // substring for test IPN, adyen sends too large number for int32
+                    orderid = orderid.Substring(0, 9); // substring for test IPN, adyen sends too large number for int32
                 }
                 OS_AdyenStoreOrderID = Convert.ToInt32(orderid); 
 
