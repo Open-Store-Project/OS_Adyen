@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
-		<package name="OS_Adyen" type="Module" version="1.0.0">
+		<package name="OS_Adyen" type="Module" version="1.1.0">
 			<friendlyName>OS_Adyen</friendlyName>
 			<description>OS_Adyen: Payment provider for open-Store</description>
 			<iconFile />
