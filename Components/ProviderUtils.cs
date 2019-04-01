@@ -79,7 +79,7 @@ namespace OS_Adyen
              */
             //string merchantReference =  "PAYMENT-" + DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ss");
             string merchantReference = orderData.PurchaseInfo.ItemID.ToString() + "_" + DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ss");
-            string paymentAmount = orderData.PurchaseInfo.GetXmlProperty("genxml/appliedtotal").Replace(".", "");
+            string paymentAmount = orderData.PurchaseInfo.GetXmlProperty("genxml/appliedtotal").Replace(".", "").Replace(",", "");
             string currencyCode = info.GetXmlProperty("genxml/textbox/currencycode");
             string shipBeforeDate = DateTime.Now.AddDays(3).ToString("yyyy-MM-dd");
             string skinCode = info.GetXmlProperty("genxml/textbox/skincode");
