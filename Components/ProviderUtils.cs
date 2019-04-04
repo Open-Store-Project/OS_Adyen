@@ -85,7 +85,7 @@ namespace OS_Adyen
             string skinCode = info.GetXmlProperty("genxml/textbox/skincode");
             string merchantAccount = info.GetXmlProperty("genxml/textbox/merchantaccount");
             string sessionValidity = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ssK");
-            string shopperLocale = Utils.GetCurrentCulture();
+            string shopperLocale = Utils.GetCurrentCulture().Replace("-","_");
             //string orderData = CompressString("Orderdata to display on the HPP can be put here");
             string countryCode = orderData.PurchaseInfo.GetXmlProperty("genxml/billaddress/genxml/dropdownlist/country");
             string shopperEmail = orderData.PurchaseInfo.GetXmlProperty("genxml/billaddress/genxml/textbox/email");
