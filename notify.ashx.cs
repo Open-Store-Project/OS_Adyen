@@ -84,7 +84,8 @@ namespace OS_Adyen.OpenStore
             var orderid = context.Request.Form["merchantReference"];
             if (orderid != null)
             {
-                orderid = orderid.Split('_')[0];
+                var startpos = StoreSettings.Current.Get("orderprefix").Length + 6;
+                orderid = orderid.Substring(startpos);
             }
             debugMsg += "orderid: " + orderid + "</br>";
 

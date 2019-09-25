@@ -58,7 +58,9 @@ namespace OS_Adyen.OpenStore
                 var orderid =  Utils.RequestQueryStringParam(HttpContext.Current, "merchantReference");
                 if (orderid != "")
                 {
-                    orderid = orderid.Split('_')[0];
+                    var startpos = StoreSettings.Current.Get("orderprefix").Length + 6;
+
+                    orderid = orderid.Substring(startpos);
                     var param = "?orderid=" + orderid;
                     var lang = Utils.RequestQueryStringParam(HttpContext.Current, "shopperLocale");
                     if (lang != "")
