@@ -32,18 +32,21 @@ namespace OS_Adyen
 
             var strOut = "OS_Adyen Ajax Error";
 
-            // NOTE: The paramCmd MUST start with the plugin ref. in lowercase. (links ajax provider to cmd)
-            switch (paramCmd)
+            if (PluginUtils.CheckPluginSecurity(PortalSettings.Current.PortalId, "os_adyen"))
             {
-                case "os_adyen_savesettings":
-                    strOut = objCtrl.SavePluginSinglePageData(context);
-                    break;
-                case "os_adyen_selectlang":
-                    objCtrl.SavePluginSinglePageData(context);
-                    var nextlang = ajaxInfo.GetXmlProperty("genxml/hidden/nextlang");
-                    var info = objCtrl.GetPluginSinglePageData("OS_Adyenpayment", "OS_AdyenPAYMENT", nextlang);
-                    strOut = NBrightBuyUtils.RazorTemplRender("settingsfields.cshtml", 0, "", info, "/DesktopModules/NBright/OS_Adyen", "config", nextlang, StoreSettings.Current.Settings());
-                    break;
+                // NOTE: The paramCmd MUST start with the plugin ref. in lowercase. (links ajax provider to cmd)
+                switch (paramCmd)
+                {
+                    case "os_adyen_savesettings":
+                        strOut = objCtrl.SavePluginSinglePageData(context);
+                        break;
+                    case "os_adyen_selectlang":
+                        objCtrl.SavePluginSinglePageData(context);
+                        var nextlang = ajaxInfo.GetXmlProperty("genxml/hidden/nextlang");
+                        var info = objCtrl.GetPluginSinglePageData("OS_Adyenpayment", "OS_AdyenPAYMENT", nextlang);
+                        strOut = NBrightBuyUtils.RazorTemplRender("settingsfields.cshtml", 0, "", info, "/DesktopModules/NBright/OS_Adyen", "config", nextlang, StoreSettings.Current.Settings());
+                        break;
+                }
             }
 
             return strOut;

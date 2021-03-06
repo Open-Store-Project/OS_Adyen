@@ -2,3 +2,4 @@ packages/
 obj/
 .vs/
 bin/
+*.zip
